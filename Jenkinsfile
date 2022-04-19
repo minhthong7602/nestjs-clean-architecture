@@ -19,13 +19,8 @@ pipeline {
       
       steps {
         sh 'npm install'
-        sh 'npm run test'
+        sh 'npm run test:cov'
       }
-      // steps {
-      //   sh 'docker ps -aq --filter="name=node-js" | grep -q . && docker stop node-js && docker rm node-js || echo "not exist container nodejs"'
-      //   sh 'docker run --name node-js -v /home/minhthong/Data/Study/Jenkin/Data/workspace/React_Native_Demo@2:/nestjs-app node:12.18.1 /bin/sh -c "cd nestjs-app && npm install && npm run test"'
-      //   sh 'docker rm node-js'
-      // }
     }
     stage('Build') {
       agent { node { label 'master' } }
@@ -43,7 +38,7 @@ pipeline {
       steps {
         sshagent(['ssh-remote']) {
           // some block
-          sh 'docker ps -aq --filter="name=nnestjs-blog" | grep -q . && docker stop nestjs-blog && docker rm nestjs-blog || echo "not exist container nestjs-blog"'
+          sh 'docker ps -aq --filter="name=nestjs-blog" | grep -q . && docker stop nestjs-blog && docker rm nestjs-blog || echo "not exist container nestjs-blog"'
           sh 'docker run -d --name "nestjs-blog" -p 5000:5000 minhthongbkhn1994/nestjs-blog:v1'
         } 
       }
