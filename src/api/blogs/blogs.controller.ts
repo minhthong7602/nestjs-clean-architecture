@@ -20,7 +20,7 @@ export class BlogsController {
   ) {}
 
   @ApiBearerAuth()
-  @Roles(ROLE_CONIFG.anonymous)
+  @Roles(ROLE_CONIFG.admin)
   @Get()
   @ApiResponse({ status: 200, description: 'The record has been successfully get list blogs.', type: ListBlogInHome })
   public async getBlogsInHome(
