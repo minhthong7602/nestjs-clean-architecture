@@ -7,11 +7,22 @@ pipeline {
       }
     }
     stage('Test') {
-      steps {
-        sh 'docker ps -aq --filter="name=node-js" | grep -q . && docker stop node-js && docker rm node-js || echo "not exist container nodejs"'
-        sh 'docker run --name node-js -v /home/minhthong/Data/Study/Jenkin/Data/workspace/React_Native_Demo@2:/nestjs-app node:12.18.1 /bin/sh -c "cd nestjs-app && npm install && npm run test"'
-        sh 'docker rm node-js'
+      agent {
+        docker {
+          image 'node:12.18.1'
+          args '-u 0:0 -v /tmp:/root/.cache'
+        }
       }
+      
+      steps {
+        sh 'npm install'
+        sh 'npm run test'
+      }
+      // steps {
+      //   sh 'docker ps -aq --filter="name=node-js" | grep -q . && docker stop node-js && docker rm node-js || echo "not exist container nodejs"'
+      //   sh 'docker run --name node-js -v /home/minhthong/Data/Study/Jenkin/Data/workspace/React_Native_Demo@2:/nestjs-app node:12.18.1 /bin/sh -c "cd nestjs-app && npm install && npm run test"'
+      //   sh 'docker rm node-js'
+      // }
     }
     stage('Build') {
       steps {
