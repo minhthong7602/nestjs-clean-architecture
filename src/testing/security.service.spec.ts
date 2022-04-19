@@ -23,7 +23,7 @@ describe('Security Service', () => {
 
    it('checkPasswordWithSalt: when user enter incorrect password', async () => {
     const encryptObj = await securityService.encryptPassword('123456');
-    const isCorrectPass = await securityService.checkPasswordWithSalt('12345', encryptObj.hash);
+    const isCorrectPass = await securityService.checkPasswordWithSalt('123456', encryptObj.hash);
     expect(isCorrectPass).toBeFalsy();
    });
 });
