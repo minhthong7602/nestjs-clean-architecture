@@ -5,7 +5,7 @@ import { AddOrUpdateBlogCommand } from 'src/application/commands/blogs/_index';
 import { JwtAuthGuard } from 'src/application/core/auth/jwt-auth.guard';
 import { Roles } from 'src/application/core/decorators/roles.decorator';
 import { ROLE_CONIFG } from 'src/application/core/auth/auth.config';
-import { ApiBearerAuth, ApiExtraModels, ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ResponseModel } from 'src/application/core/configs/response-status.config';
 import { Blog } from 'src/domain/entities/blogs.entity';
 import { ListBlogInHome } from 'src/application/queries/blogs/listHome.query';
@@ -36,10 +36,9 @@ export class BlogsController {
   @Roles(ROLE_CONIFG.admin)
   @Post('create')
   public async addOrUpdateBlog(
-    @Body() body: AddOrUpdateBlogCommand,
-    @Res() response
-  ) {
-    const commandResponse = await this.commandBus.execute(new AddOrUpdateBlogCommand(
+    @Body() body: AddOrUpdateBlogCommand
+  ) : Promise<ResponseModel<Blog>> {
+    return await this.commandBus.execute(new AddOrUpdateBlogCommand(
       body.id,
       body.title,
       body.sub_title,
@@ -48,7 +47,5 @@ export class BlogsController {
       body.categories,
       body.status
     ));
-
-    response.status(HttpStatus.OK).json(commandResponse);
   }
 }

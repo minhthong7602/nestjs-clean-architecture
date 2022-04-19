@@ -6,6 +6,13 @@ pipeline {
         git credentialsId: 'minhthong_git3', url: 'https://github.com/minhthong7602/nestjs-clean-architecture.git'
       }
     }
+    stage('Test') {
+      steps {
+        sh 'docker ps -aq --filter="name=node-js" | grep -q . && docker stop node-js && docker rm node-js || echo "not exist container nodejs"'
+        sh 'docker run --name node-js -v /home/minhthong/Data/Study/Jenkin/Data/workspace/React_Native_Demo@2:/nestjs-app node:12.18.1 /bin/sh -c "cd nestjs-app && npm install && npm run test"'
+        sh 'docker rm node-js'
+      }
+    }
     stage('Build') {
       steps {
         sh 'docker build -t minhthongbkhn1994/nestjs-blog:v1 .'

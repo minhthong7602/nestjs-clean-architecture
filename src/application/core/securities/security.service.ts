@@ -25,7 +25,7 @@ export class SecurityService {
     })
   }
 
-  checkPasswordWithSalt(plainPassword: string, hash: string, salt) : Promise<boolean> {
+  checkPasswordWithSalt(plainPassword: string, hash: string) : Promise<boolean> {
     return new Promise((resolve) => {
       bcrypt.compare(plainPassword, hash, (err, result) => {
         if(err) {

@@ -33,7 +33,7 @@ export class ChangePasswordHandler implements ICommandHandler<ChangePasswordComm
       return response as ResponseModel<Users>;
     }
     // validate old password
-    const isCheckPass = await this.securityService.checkPasswordWithSalt(command.old_password, userTemp.password, userTemp.password_salt);
+    const isCheckPass = await this.securityService.checkPasswordWithSalt(command.old_password, userTemp.password);
     if(!isCheckPass) {
       response.status = RESPONSE_STATUS.ERROR;
       response.message = 'Password faild';
