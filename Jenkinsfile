@@ -3,11 +3,11 @@ pipeline {
   agent none
 
   stages {
-    stage('Clone') {
-      steps {
-        git credentialsId: 'minhthong_git3', url: 'https://github.com/minhthong7602/nestjs-clean-architecture.git'
-      }
-    }
+    // stage('Clone') {
+    //   steps {
+    //     git credentialsId: 'minhthong_git3', url: 'https://github.com/minhthong7602/nestjs-clean-architecture.git'
+    //   }
+    // }
     stage('Test') {
       agent {
         docker {
