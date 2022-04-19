@@ -1,4 +1,4 @@
-import { NestFactory, HttpAdapterHost } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
@@ -8,10 +8,10 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-    .setTitle('BruceLee Blog API')
+    .setTitle('BruceLee Blog API Minh Thong')
     .setDescription('The BruceLee Blog API description')
-    .setVersion('1.0')
-    .addTag('Blogs')
+    .setVersion('1.1')
+    .addTag('Blogs MT')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
