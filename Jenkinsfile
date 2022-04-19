@@ -4,7 +4,7 @@ pipeline {
 
   stages {
     stage('Clone') {
-      agent { node { label 'clone' } }
+      agent { node { label 'master' } }
       steps {
         git credentialsId: 'minhthong_git3', url: 'https://github.com/minhthong7602/nestjs-clean-architecture.git'
       }
@@ -28,7 +28,7 @@ pipeline {
       // }
     }
     stage('Build') {
-      agent { node { label 'build' } }
+      agent { node { label 'master' } }
       steps {
         sh 'docker build -t minhthongbkhn1994/nestjs-blog:v1 .'
         withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
@@ -39,7 +39,7 @@ pipeline {
       }
     }
     stage('Run') {
-      agent { node { label 'run' } }
+      agent { node { label 'master' } }
       steps {
         sshagent(['ssh-remote']) {
           // some block
