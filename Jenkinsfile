@@ -43,7 +43,8 @@ pipeline {
       steps {
         sshagent(['ssh-remote']) {
           // some block
-          sh 'docker ps -aq --filter="name=nestjs-blog" | grep -q . && docker stop nestjs-blog && docker rm nestjs-blog && docker run -d --name "nestjs-blog" -p 5000:5000 minhthongbkhn1994/nestjs-blog:v1 || docker run -d --name "nestjs-blog" -p 5000:5000 minhthongbkhn1994/nestjs-blog:v1'
+          sh 'docker ps -aq --filter="name=nnestjs-blog" | grep -q . && docker stop nestjs-blog && docker rm nestjs-blog || echo "not exist container nestjs-blog"'
+          sh 'docker run -d --name "nestjs-blog" -p 5000:5000 minhthongbkhn1994/nestjs-blog:v1'
         } 
       }
     }
