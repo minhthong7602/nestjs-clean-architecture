@@ -13,7 +13,7 @@ pipeline {
       agent {
         docker {
           image 'node:12.18.1'
-          args '-u 1000:1000 -v /tmp:/root/.cache'
+          args '-u 0:0 -v /tmp:/root/.cache'
         }
       }
       
