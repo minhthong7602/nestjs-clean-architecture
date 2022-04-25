@@ -31,6 +31,12 @@ pipeline {
         }
         
         sh 'docker image rm minhthongbkhn1994/nestjs-blog:v1'
+        
+        script {
+          if(GIT_BRANCH ==~ /.*master.*/) {
+            echo "Commit from master brach"
+          }
+        }
       }
     }
     stage('Run') {
