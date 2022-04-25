@@ -1,0 +1,20 @@
+pipeline {
+
+  agent none
+
+  stages {
+    stage('Test') {
+      agent {
+        docker {
+          image 'node:12.18.1'
+          args '-u 0:0 -v /tmp:/root/.cache'
+        }
+      }
+      
+      steps {
+        sh 'npm install'
+        sh 'npm run test:cov'
+      }
+    }
+  }
+}
