@@ -31,6 +31,7 @@ pipeline {
         }
         
         sh 'docker image rm minhthongbkhn1994/nestjs-blog:v1'
+        echo 'Pulling brach...' + GIT_BRANCH
       }
     }
     stage('Run') {
