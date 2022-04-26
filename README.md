@@ -1,3 +1,5 @@
+# Clean Architecture NestJs with CQRS, Domain Events
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
@@ -7,34 +9,158 @@
 [linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
 [linux-url]: https://travis-ci.org/nestjs/nest
   
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/dm/@nestjs/core.svg" alt="NPM Downloads" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://api.travis-ci.org/nestjs/nest.svg?branch=master" alt="Travis" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://img.shields.io/travis/nestjs/nest/master.svg?label=linux" alt="Linux" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#5" alt="Coverage" /></a>
-<a href="https://gitter.im/nestjs/nestjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge"><img src="https://badges.gitter.im/nestjs/nestjs.svg" alt="Gitter" /></a>
-<a href="https://opencollective.com/nest#backer"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
-  <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Use Cases
+
+- CQRS
+
+- Domain Events
+
+- CRUD
+
+- Store data in MySql
+
+- Unit Test Jest.
+
+- CI/CD By Jenkins
+
+## Overview
+
+## Domain
+
+This will contain all entities, events, enums, types and logic specific to the domain layer.
+
+## Application
+
+This layer contains all application logic. It is dependent on the domain layer and infranstructure
+
+## Infrastructure
+
+This layer contains classes for accessing database.
+
+## WebAPI
+This layer is REST API. This layer depends on the Application.
+
+
+## Project structure
+
+```
+.
+├── src
+│   ├── api
+│   │   ├── blogs
+|   |   |     ├── blogs.controller.ts
+│   │   │     └── blogs.module.ts
+│   │   |
+|   |   ├── users
+|   |         ├── users.controller.ts
+|   |         └── users.module.ts
+│   │
+│   └── applicant                             
+│   |   ├── core
+|   |   |    ├── auth
+|   |   |    |    ├── auth.config.ts
+|   |   |    |    ├── auth.service.ts
+|   |   |    |    ├── auth.module.ts
+|   |   |    |    └── ...etc
+|   |   |    ├── config
+|   |   |    |    ├── orm.config.ts
+|   |   |    |    └── response-status.config.ts
+|   |   |    |
+|   |   |    ├── decorators
+|   |   |    |    └── roles.decorator.ts
+|   |   |    |
+|   |   |    ├── exceptions-filter
+|   |   |    |    ├── all-exception.filter.ts
+|   |   |    |    ├── http-exception.filter.ts
+|   |   |    |    └── not-found.filter.filter.ts
+|   |   |    |
+|   |   |    ├── middlewares
+|   |   |    |    └── logger.middleware.ts
+|   |   |    |
+|   |   |    └── securities
+|   |   |        └── security.service.ts
+|   |   |       
+|   |   |                  
+│   |   ├── queries
+|   |   |    ├── blogs
+|   |   |    |    ├── listHome.query.ts
+|   |   |    |    └── _index.ts
+|   |   |    |
+|   |   |    └── queries.module.ts
+|   |   |                        
+│   |   ├── commands
+|   |   |    ├── blogs
+|   |   |    |    ├── addOrUpdate.command.ts
+|   |   |    |    └── _index.ts
+|   |   |    |
+|   |   |    ├── users
+|   |   |    |    ├── change-password.command.ts
+|   |   |    |    ├── login.command.ts
+|   |   |    |    ├── register.command.ts
+|   |   |    |    └── _index.ts
+|   |   |    |
+|   |   |    └── queries.module.ts
+|   |   |                                             
+│   |   └── events-handlers
+|   |         ├── blogs
+|   |         |    ├── send-push-update.handler.ts
+|   |         |    ├── update-blog-update.handler.ts
+|   |         |    └── _index.ts
+|   |         |
+|   |         └── events-handler.module.ts  
+|   |    
+|   ├── domain
+|   |    ├── entities
+|   |    |    ├── base.entity.ts
+|   |    |    ├── blog.entity.ts 
+|   |    |    ├── user.entity.ts
+|   |    |    └── ...etc
+|   |    |
+|   |    └── events
+|   |         ├── blogs
+|   |         |    ├── send-push-update.event.ts
+|   |         |    └── update-blog.event.ts
+|   |         |
+|   |         └── base.event.ts
+|   |
+|   ├── infrastructure
+|   |    └── respositories
+|   |        ├── base.repository.ts
+|   |        ├── blog.repository.ts 
+|   |        ├── user.repository.ts
+|   |        └── ...etc
+|   |
+|   └── testing
+|        └── security.service.spec.ts
+|     
+├── .dockerignore
+├── Dockerfile
+├── Jenkinsfile                               
+├── package.json
+├── nest-cli.json                          
+├── README.md
+├── tsconfig.build.json                       
+└── tsconfig.json     
+```
+
+
+
+## Import Database By Query
+```bash
+$ cd database
+$ mysql -u [user] -p bruceleeblog < backup.sql
+```
+- Change connection string in /src/application/core/configs/orm.config.ts
 
 ## Description
-
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Support── 
 
-## Installation
-
-```bash
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 $ npm install
 ```
 
-## Running the app
+## Running the app by Nest CLI
 
 ```bash
 # development
@@ -42,10 +168,9 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
+## Support── 
 
-# production mode
-$ npm run start:prod
-```
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Test
 
@@ -59,16 +184,34 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+## Running the app by Docker
 
-## Support
+```bash
+# build docker image
+$ docker build -t ${DOCKER_NAME}:${DOCKER_TAG} .
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# stop and remove docker container same name
+$ docker ps -aq --filter="name=${CONTAIERNAME_NAME}" | grep -q . && docker stop ${CONTAIERNAME_NAME} && docker rm ${CONTAIERNAME_NAME}
+
+# run docker image
+$ docker run -d --name ${CONTAIERNAME_NAME} -p 5000:5000 ${DOCKER_NAME}:${DOCKER_TAG}
+```
+
+## CI/CD
+```bash
+# run Jenkins by Docker
+$ docker run -d --name jenkins -p 8080:8080 -p 50000:50000 -v ${DATA_PATH}:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):$(which docker) --user 1000:134 jenkins/jenkins:lts
+
+# config docker plugin
+https://stackoverflow.com/questions/47709208/how-to-find-docker-host-uri-to-be-used-in-jenkins-docker-plugin
+
+# allow permission docker sock
+sudo setfacl --modify user:${USER_NAME}:rw /var/run/docker.sock
+```
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - MinhThong
 
 ## License
 

@@ -53,7 +53,7 @@ pipeline {
                 sh 'docker run -d --name "nestjs-blog-dev" -p 5000:5000 minhthongbkhn1994/nestjs-blog:dev'
               } else {
                 sh 'docker ps -aq --filter="name=nestjs-blog-prod" | grep -q . && docker stop nestjs-blog-prod && docker rm nestjs-blog-prod || echo "not exist container nestjs-blog-prod"'
-                sh 'docker run -d --name "nestjs-blog-prod" -p 5001:5001 minhthongbkhn1994/nestjs-blog:latest'
+                sh 'docker run -d --name "nestjs-blog-prod" -p 5001:5000 minhthongbkhn1994/nestjs-blog:latest'
               }
             }
           }
