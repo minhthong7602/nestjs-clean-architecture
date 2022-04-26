@@ -3,6 +3,12 @@ import { SecurityService } from "../application/core/securities/security.service
 describe('Security Service', () => {
    const securityService = new SecurityService();
 
+   it('encryptPassword: Check plain password same password enscript', async () => {
+    const plainPassword = "123456";
+    const encryptObj = await securityService.encryptPassword(plainPassword);
+    expect(encryptObj.hash === plainPassword).toBeFalsy();
+   });
+
    it('encryptPassword & hashPassword: when user enter correct password', async () => {
      const encryptObj = await securityService.encryptPassword('123456');
      const hashPassWord = await securityService.hashPassword('123456', encryptObj.salt);
