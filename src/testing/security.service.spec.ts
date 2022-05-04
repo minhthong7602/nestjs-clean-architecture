@@ -4,7 +4,7 @@ describe('Security Service', () => {
    const securityService = new SecurityService();
 
    it('encryptPassword: Check plain password same password enscript', async () => {
-    const plainPassword = "1234567";
+    const plainPassword = "12345678";
     const encryptObj = await securityService.encryptPassword(plainPassword);
     expect(encryptObj.hash === plainPassword).toBeFalsy();
    });
