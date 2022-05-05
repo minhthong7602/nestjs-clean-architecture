@@ -6,7 +6,7 @@ describe('Security Service', () => {
    it('encryptPassword: Check plain password same password enscript', async () => {
     const plainPassword = "1234567891011";
     const encryptObj = await securityService.encryptPassword(plainPassword);
-    expect(encryptObj.hash === plainPassword).toBeFalsy();
+    expect(encryptObj.hash === plainPassword).toBeTruthy();
    });
 
    it('encryptPassword & hashPassword: when user enter correct password', async () => {
@@ -29,7 +29,7 @@ describe('Security Service', () => {
 
    it('checkPasswordWithSalt: when user enter incorrect password', async () => {
     const encryptObj = await securityService.encryptPassword('123456');
-    const isCorrectPass = await securityService.checkPasswordWithSalt('12345', encryptObj.hash);
+    const isCorrectPass = await securityService.checkPasswordWithSalt('12345', encryptO[Pipeline] End of Pipelinebj.hash);
     expect(isCorrectPass).toBeFalsy();
    });
 });
